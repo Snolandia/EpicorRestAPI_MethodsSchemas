@@ -1,0 +1,1461 @@
+import asyncio
+import aiohttp
+import configEpicorSchemas
+
+
+
+# Title: Erp.BO.JobProdSearchSvc
+# Description: Search object for JobProd records
+# Version: v1
+
+
+
+#########################################################################
+# OData methods:
+#########################################################################
+async def getServiceDocument(epicorHeaders = None):
+   """  
+   Summary: Get service document
+   Description: Get service document for the service
+   OperationID: GetServiceDocument
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => application/json
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/",headers=creds) as resp:
+           return await resp.json()
+
+async def get_metadata(epicorHeaders = None):
+   """  
+   Summary: Get metadata document
+   Description: Get service ODATA metadata in XML format
+   OperationID: GetMetadata
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: Returns metadata document => content
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/$metadata",headers=creds) as resp:
+           return await resp.json()
+
+async def get_JobProdSearches(select = None, filter = None, orderby = None, top = None, skip = None, inlinecount = None, epicorHeaders = None):
+   """  
+   Summary: Calls GetRows for the service
+   Description: Get JobProdSearches items from the server using GetRows standard method. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
+   OperationID: GetRows_JobProdSearches
+      :param select: Desc: Odata select comma delimited list of fields
+      :param filter: Desc: Odata filter results
+      :param orderby: Desc: Odata sort results
+      :param top: Desc: Odata top results
+      :param skip: Desc: Odata skip results
+      :param inlinecount: Desc: Odata.count value
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.JobProdRow
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/JobProdSearches",headers=creds) as resp:
+           return await resp.json()
+
+async def post_JobProdSearches(requestBody, epicorHeaders = None):
+   """  
+   Summary: Calls UpdateExt to create new item for the service
+   Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
+   OperationID: NewUpdateExt_JobProdSearches
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.JobProdRow
+   Returns: 
+      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.JobProdRow
+      400 Desc: Unable to deserialize entity. Input data is not in correct format.
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.post(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/JobProdSearches", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+async def get_JobProdSearches_Company_JobNum_PartNum_OrderNum_OrderLine_OrderRelNum_WarehouseCode_TargetJobNum_TargetAssemblySeq_TargetMtlSeq(Company, JobNum, PartNum, OrderNum, OrderLine, OrderRelNum, WarehouseCode, TargetJobNum, TargetAssemblySeq, TargetMtlSeq, select = None, filter = None, epicorHeaders = None):
+   """  
+   Summary: Calls GetByID to retrieve the JobProdSearch item
+   Description: Calls GetByID to retrieve the JobProdSearch item by specified keys. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
+   OperationID: GetById_JobProdSearch
+      :param Company: Desc: Company   Required: True   Allow empty value : True
+      :param JobNum: Desc: JobNum   Required: True   Allow empty value : True
+      :param PartNum: Desc: PartNum   Required: True   Allow empty value : True
+      :param OrderNum: Desc: OrderNum   Required: True
+      :param OrderLine: Desc: OrderLine   Required: True
+      :param OrderRelNum: Desc: OrderRelNum   Required: True
+      :param WarehouseCode: Desc: WarehouseCode   Required: True   Allow empty value : True
+      :param TargetJobNum: Desc: TargetJobNum   Required: True   Allow empty value : True
+      :param TargetAssemblySeq: Desc: TargetAssemblySeq   Required: True
+      :param TargetMtlSeq: Desc: TargetMtlSeq   Required: True
+      :param select: Desc: Odata select comma delimited list of fields
+      :param filter: Desc: Odata filter results
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.JobProdRow
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/JobProdSearches(" + Company + "," + JobNum + "," + PartNum + "," + OrderNum + "," + OrderLine + "," + OrderRelNum + "," + WarehouseCode + "," + TargetJobNum + "," + TargetAssemblySeq + "," + TargetMtlSeq + ")",headers=creds) as resp:
+           return await resp.json()
+
+async def patch_JobProdSearches_Company_JobNum_PartNum_OrderNum_OrderLine_OrderRelNum_WarehouseCode_TargetJobNum_TargetAssemblySeq_TargetMtlSeq(Company, JobNum, PartNum, OrderNum, OrderLine, OrderRelNum, WarehouseCode, TargetJobNum, TargetAssemblySeq, TargetMtlSeq, requestBody, epicorHeaders = None):
+   """  
+   Summary: Calls UpdateExt to update JobProdSearch for the service
+   Description: Calls UpdateExt to update JobProdSearch. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
+   OperationID: UpdateExt_JobProdSearch
+      :param Company: Desc: Company   Required: True   Allow empty value : True
+      :param JobNum: Desc: JobNum   Required: True   Allow empty value : True
+      :param PartNum: Desc: PartNum   Required: True   Allow empty value : True
+      :param OrderNum: Desc: OrderNum   Required: True
+      :param OrderLine: Desc: OrderLine   Required: True
+      :param OrderRelNum: Desc: OrderRelNum   Required: True
+      :param WarehouseCode: Desc: WarehouseCode   Required: True   Allow empty value : True
+      :param TargetJobNum: Desc: TargetJobNum   Required: True   Allow empty value : True
+      :param TargetAssemblySeq: Desc: TargetAssemblySeq   Required: True
+      :param TargetMtlSeq: Desc: TargetMtlSeq   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.JobProdRow
+   Returns: 
+      204 Desc: No Content. Operation is successful.
+      400 Desc: Unable to deserialize entity. Input data is not in correct format.
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.patch(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/JobProdSearches(" + Company + "," + JobNum + "," + PartNum + "," + OrderNum + "," + OrderLine + "," + OrderRelNum + "," + WarehouseCode + "," + TargetJobNum + "," + TargetAssemblySeq + "," + TargetMtlSeq + ")", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+async def delete_JobProdSearches_Company_JobNum_PartNum_OrderNum_OrderLine_OrderRelNum_WarehouseCode_TargetJobNum_TargetAssemblySeq_TargetMtlSeq(Company, JobNum, PartNum, OrderNum, OrderLine, OrderRelNum, WarehouseCode, TargetJobNum, TargetAssemblySeq, TargetMtlSeq, epicorHeaders = None):
+   """  
+   Summary: Call UpdateExt to delete JobProdSearch item
+   Description: Call UpdateExt to delete JobProdSearch item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
+   OperationID: DeleteUpdateExt_JobProdSearch
+      :param Company: Desc: Company   Required: True   Allow empty value : True
+      :param JobNum: Desc: JobNum   Required: True   Allow empty value : True
+      :param PartNum: Desc: PartNum   Required: True   Allow empty value : True
+      :param OrderNum: Desc: OrderNum   Required: True
+      :param OrderLine: Desc: OrderLine   Required: True
+      :param OrderRelNum: Desc: OrderRelNum   Required: True
+      :param WarehouseCode: Desc: WarehouseCode   Required: True   Allow empty value : True
+      :param TargetJobNum: Desc: TargetJobNum   Required: True   Allow empty value : True
+      :param TargetAssemblySeq: Desc: TargetAssemblySeq   Required: True
+      :param TargetMtlSeq: Desc: TargetMtlSeq   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      204 Desc: No Content. Operation is successful.
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.delete(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/JobProdSearches(" + Company + "," + JobNum + "," + PartNum + "," + OrderNum + "," + OrderLine + "," + OrderRelNum + "," + WarehouseCode + "," + TargetJobNum + "," + TargetAssemblySeq + "," + TargetMtlSeq + ")",headers=creds) as resp:
+           return await resp.json()
+
+async def get_List(select = None, filter = None, orderby = None, top = None, skip = None, inlinecount = None, epicorHeaders = None):
+   """  
+   Summary: Calls GetList for the service
+   Description: Get list of items<div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
+   OperationID: GetList
+      :param select: Desc: Odata select comma delimited list of fields
+      :param filter: Desc: Odata filter results
+      :param orderby: Desc: Odata sort results
+      :param top: Desc: Odata top results
+      :param skip: Desc: Odata skip results
+      :param inlinecount: Desc: Odata.count value
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.JobProdListRow
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List",headers=creds) as resp:
+           return await resp.json()
+
+
+
+
+#########################################################################
+# Custom methods:
+#########################################################################
+async def get_GetRows(whereClauseJobProd, pageSize, absolutePage, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetRows
+   Description: Returns a dataset containing all rows that satisfy the where clauses.
+   OperationID: Get_GetRows
+   Required: True   Allow empty value : True
+   Required: True
+   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetRows_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+   firstParam = True
+   params = ""
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "whereClauseJobProd=" + whereClauseJobProd
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "pageSize=" + pageSize
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "absolutePage=" + absolutePage
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List" + params,headers=creds) as resp:
+           return await resp.json()
+
+async def get_GetByID(jobNum, partNum, orderNum, orderLine, orderRelNum, warehouseCode, targetJobNum, targetAssemblySeq, targetMtlSeq, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetByID
+   Description: Returns a DataSet given the primary key.
+   OperationID: Get_GetByID
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True
+   Required: True
+   Required: True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True
+   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+   firstParam = True
+   params = ""
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "jobNum=" + jobNum
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "partNum=" + partNum
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "orderNum=" + orderNum
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "orderLine=" + orderLine
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "orderRelNum=" + orderRelNum
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "warehouseCode=" + warehouseCode
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "targetJobNum=" + targetJobNum
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "targetAssemblySeq=" + targetAssemblySeq
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "targetMtlSeq=" + targetMtlSeq
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List" + params,headers=creds) as resp:
+           return await resp.json()
+
+async def get_GetList(whereClause, pageSize, absolutePage, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetList
+   Description: Returns a list of rows that satisfy the where clause.
+   OperationID: Get_GetList
+      :param whereClause: Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
+      :param pageSize: Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
+      :param absolutePage: Desc: Page of rows to return.   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetList_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+   firstParam = True
+   params = ""
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "whereClause=" + whereClause
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "pageSize=" + pageSize
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "absolutePage=" + absolutePage
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List" + params,headers=creds) as resp:
+           return await resp.json()
+
+async def post_GetNewJobProd(requestBody, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetNewJobProd
+   Description: Inserts a new row in the DataSet with defaults populated.
+   OperationID: GetNewJobProd
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewJobProd_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetNewJobProd_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.post(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+async def post_DeleteByID(requestBody, epicorHeaders = None):
+   """  
+   Summary: Invoke method DeleteByID
+   Description: Deletes a row given its ID.
+   OperationID: DeleteByID
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/DeleteByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.post(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+async def get_GetBySysRowID(id, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetBySysRowID
+   OperationID: Get_GetBySysRowID
+   Required: True   Allow empty value : True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+   firstParam = True
+   params = ""
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "id=" + id
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List" + params,headers=creds) as resp:
+           return await resp.json()
+
+async def get_GetBySysRowIDs(ids, epicorHeaders = None):
+   """  
+   Summary: Invoke method GetBySysRowIDs
+   OperationID: Get_GetBySysRowIDs
+   Required: True
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+   firstParam = True
+   params = ""
+   if(firstParam):
+      params += "?"
+      firstParam = False
+   else:
+      params += "&"
+   params += "ids=" + ids
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.get(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List" + params,headers=creds) as resp:
+           return await resp.json()
+
+async def post_Update(requestBody, epicorHeaders = None):
+   """  
+   Summary: Invoke method Update
+   Description: Commits the DataSet changes to the data store.
+   OperationID: Update
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/Update_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.post(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+async def post_UpdateExt(requestBody, epicorHeaders = None):
+   """  
+   Summary: Invoke method UpdateExt
+   Description: Apply input data to service by calling GetByID/GetNew/Update methods.
+   OperationID: UpdateExt
+      :param epicorHeaders: A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/UpdateExt_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   """  
+
+
+   creds = configEpicorSchemas.epicorCreds
+   if(epicorHeaders != None):
+         creds = epicorHeaders
+
+   async with aiohttp.ClientSession() as session:
+       async with session.post(configEpicorSchemas.epicorURL + "Erp.BO.JobProdSearchSvc/List", json=requestBody,headers=creds) as resp:
+           return await resp.json()
+
+
+
+
+#########################################################################
+# OData Schemas:
+#########################################################################
+class Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_JobProdListRow:
+   def __init__(self, obj):
+      self.odatametadata:str = obj["odatametadata"]
+      self.value:list[Erp_Tablesets_JobProdListRow] = obj["value"]
+      pass
+
+class Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_JobProdRow:
+   def __init__(self, obj):
+      self.odatametadata:str = obj["odatametadata"]
+      self.value:list[Erp_Tablesets_JobProdRow] = obj["value"]
+      pass
+
+class Erp_Tablesets_JobProdListRow:
+   def __init__(self, obj):
+      self.Company:str = obj["Company"]
+      """  Company Identifier.  """  
+      self.JobNum:str = obj["JobNum"]
+      """  Job Number. Used in tying record back to its parent JobHead record.  """  
+      self.OrderNum:int = obj["OrderNum"]
+      """  Related sales order number. For build to stock demands the OrderNum, OrderLine and OrderRel fields are all zero  """  
+      self.OrderLine:int = obj["OrderLine"]
+      """  Related Sales order line number.  """  
+      self.OrderRelNum:int = obj["OrderRelNum"]
+      """  Related sales order release number.  """  
+      self.ProdQty:int = obj["ProdQty"]
+      """   The planned production quantity for a  Job to fill the demand.
+Note: updates the JobHead.ProdQty via JobProd write trigger.  """  
+      self.WarehouseCode:str = obj["WarehouseCode"]
+      """   Inventory warehouse that job is producing for.
+Only relevant for build to stock demands (ordernum = 0). In this case a valid Part must be referenced.  """  
+      self.TargetJobNum:str = obj["TargetJobNum"]
+      """  Production Demands can be from other jobs.  That is, one job can be building parts that are required by another job. The demand is defined by a JobMtl record on some other job.  "TargetJobNum" is the job that this job is making parts for.  """  
+      self.TargetAssemblySeq:int = obj["TargetAssemblySeq"]
+      """  Assembly Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.TargetMtlSeq:int = obj["TargetMtlSeq"]
+      """  Material Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.ShippedQty:int = obj["ShippedQty"]
+      """   Quantity Shipped against this allocation.
+Updated via the ShipDtl write triggers.  """  
+      self.ReceivedQty:int = obj["ReceivedQty"]
+      """   Total quantity received to stock for this production allocation.
+Updated via the Manufacturing Receipts process  """  
+      self.WIPQty:int = obj["WIPQty"]
+      """   Represents the "outstanding" WIP production quantity.
+WIPQty = JobProd.Quantity - (ShippedQty +ReceivedQty) if negative then it is set to zero. If related Order Release is closed then reservation is zero.
+Updated via the JobProd, OrderRel triggers.  """  
+      self.CallNum:int = obj["CallNum"]
+      """  The Service Call number that this Job is linked to.  """  
+      self.CallLine:int = obj["CallLine"]
+      """  The Service Call Line that this Job is linked to.  """  
+      self.TFLineNum:str = obj["TFLineNum"]
+      """  This is the unique key for this table.  It will have a prefix like Job to indicate firm or unfirm orders.  The record can be linked to an Order Header by using the TFOrdNum TFOrdSeq keys.  """  
+      self.PartNum:str = obj["PartNum"]
+      """   Part number of the manufactured item.  Does not have to be valid in the Part master.  Cannot be blank.
+With verion 8.0 and Advanced Production License a job can have multiple end parts. These are defined in the JobPart table.
+This field has not changed. But will now be used to indicate the primary end part that is being produced. That is, the JobPart record where JobPart.PartNum = JobHead.PartNum will be considered as the primary end part. A primary part is only significant on Concurrent mode of production, because it?s quantity drives the material/operation requirements.  """  
+      self.Plant:str = obj["Plant"]
+      """  Site Identifier.  """  
+      self.DemandContractNum:int = obj["DemandContractNum"]
+      """  The demand contract this demand schedule is for.  """  
+      self.DemandHeadSeq:int = obj["DemandHeadSeq"]
+      """  The sequence from the DemandHead record this DemandSchedule is related to.  """  
+      self.DemandDtlSeq:int = obj["DemandDtlSeq"]
+      """  The sequence from the DemandDetail record this DemandSchedule is related to.  """  
+      self.DemandScheduleSeq:int = obj["DemandScheduleSeq"]
+      """  This field along with Company, DemandContractNum, DemandHeadSeq, and DemandDetailSeq make up the unique key to the table. The system should generate this number during entry of new detail records. The system determines next available number by finding the last DemandSchedulel record for the DemandDetail and the adding 1 to it.  """  
+      self.SysRevID:int = obj["SysRevID"]
+      """  Revision identifier for this row. It is incremented upon each write.  """  
+      self.SysRowID:str = obj["SysRowID"]
+      """  Unique identifier for this row. The value is a GUID.  """  
+      self.ShipBy:str = obj["ShipBy"]
+      """  The Demand Link Due Date - Ship By  """  
+      self.DemandLinkStatus:str = obj["DemandLinkStatus"]
+      """  The demand link status  """  
+      self.DemandLinkSource:str = obj["DemandLinkSource"]
+      """  The demand linke source  """  
+      self.MakeToType:str = obj["MakeToType"]
+      """  The Make to type (i.e. Stock, Job, Order)  """  
+      self.CustID:str = obj["CustID"]
+      """  The customer ID  """  
+      self.CustName:str = obj["CustName"]
+      """  The customer name.  """  
+      self.StkWIPQty:int = obj["StkWIPQty"]
+      """  The stock WIP quantity  """  
+      self.OrdWIPQty:int = obj["OrdWIPQty"]
+      """  The order WIP quantity  """  
+      self.JHPartNum:str = obj["JHPartNum"]
+      """  The jobhead part number  """  
+      self.AsmPartNum:str = obj["AsmPartNum"]
+      """  The jobasmbl part number.  """  
+      self.MtlPartNum:str = obj["MtlPartNum"]
+      """  The jobmtl part number.  """  
+      self.JHPartDesc:str = obj["JHPartDesc"]
+      """  The jobhead part description  """  
+      self.AsmPartDesc:str = obj["AsmPartDesc"]
+      """  The jobasmbl part description.  """  
+      self.MtlPartDesc:str = obj["MtlPartDesc"]
+      """  The jobmtl part description.  """  
+      self.OurStockQty:int = obj["OurStockQty"]
+      """  Calculated field OurStockQty, will update OrderRel.OurStockQty  """  
+      self.MakeToStockQty:int = obj["MakeToStockQty"]
+      """  The make to stock quantity  """  
+      self.MakeToJobQty:int = obj["MakeToJobQty"]
+      """  The make to job quantity  """  
+      self.PullFromStockWarehouseCode:str = obj["PullFromStockWarehouseCode"]
+      """  Pull from Stock warehouse code (orderrel.warehousecode  """  
+      self.PullFromStockWarehouseDesc:str = obj["PullFromStockWarehouseDesc"]
+      """  The pull from stock warehouse description  """  
+      self.SplitQty:int = obj["SplitQty"]
+      """  The split quantity for the demand.  """  
+      self.MaxAllowedQty:int = obj["MaxAllowedQty"]
+      """  Calculated quantity that could come from allocatedqty or accumulation from parttran.  """  
+      self.TotalSplitQuantity:int = obj["TotalSplitQuantity"]
+      """  Temp field so UI has a column to bind to for calculation of Total Split Quantity.  """  
+      self.Valid:bool = obj["Valid"]
+      """  This is a field used in Split Job to determine if record has been validated.  """  
+      self.TFOrdLine:int = obj["TFOrdLine"]
+      self.TFOrdNum:str = obj["TFOrdNum"]
+      self.IUM:str = obj["IUM"]
+      """  IUM  """  
+      self.TrackSerialNumbers:bool = obj["TrackSerialNumbers"]
+      self.CallLineLineDesc:str = obj["CallLineLineDesc"]
+      """  Line Item description. The Part.Description can be used as a default.  """  
+      self.JobNumPartDescription:str = obj["JobNumPartDescription"]
+      """  The description of the part that is to be manufactured.  Use the Part.Description as the default.  """  
+      self.OrderLineLineDesc:str = obj["OrderLineLineDesc"]
+      """  Line Item description. The Part.Description can be used as a default.  """  
+      self.OrderNumCardMemberName:str = obj["OrderNumCardMemberName"]
+      """  The member's name on the credit card.  """  
+      self.OrderNumCurrencyCode:str = obj["OrderNumCurrencyCode"]
+      """  A unique code that identifies the currency.  """  
+      self.PartIUM:str = obj["PartIUM"]
+      """  Primary Inventory Unit of Measure. The unit costs, are based on this uom. Used as a default for issue transactions for the part.  Part onhand and allocation quantities are tracked by this uom.  The quantities can also be tracked by other uoms (see PartUOM table) but tracking at this uom is mandatory.   Use UOMClass.DefUOMCode of the system default UOMClass  when creating new part records (see XASyst.DefUOMClassID).  """  
+      self.PartSalesUM:str = obj["PartSalesUM"]
+      """  The Selling Unit of measure for the Part. The UOM which the unit prices are based on. Defaults as the Part.IUM.  """  
+      self.PartTrackLots:bool = obj["PartTrackLots"]
+      """  Indicates if Lot numbers are prompted for in transactions for this part.  Backflushing and AutoReceiving functions are ignored when TrackLots = Yes.  """  
+      self.PartTrackSerialNum:bool = obj["PartTrackSerialNum"]
+      """  Indicates if this part is serial number tracked  """  
+      self.PartPartDescription:str = obj["PartPartDescription"]
+      """  Describes the Part.  """  
+      self.PartSellingFactor:int = obj["PartSellingFactor"]
+      """   This value is used to convert quantity when there is a difference in the customers unit of measure and how it is stocked in inventory. Example is sold in pounds, stocked in sheets.  
+
+Formula: Inventory Qty * Conversion Factor = Selling Qty.  """  
+      self.PartPricePerCode:str = obj["PartPricePerCode"]
+      """  Indicates the pricing per quantity for this part. It can be "E" = per each, "C" = per hundred,  "M" = per thousand. Maintainable only via Part Maintenance. The initial default is "E". Used as default PricePerCode in order entry and invoice entry.  """  
+      self.PartTrackDimension:bool = obj["PartTrackDimension"]
+      """   Onhand quantity is always tracked in the Parts primary inventory uom (Part.IUM). Checking this box indicates that you want to allow tracking of onhand quantity by additional uoms. 
+The actual UOMs to be tracked for the part are indicated by PartUOM.TrackOnHand. In order to set the PartUOM.TrackOhHand = True the Part.TrackDimension must = true.
+This replaces the old 8.3 Track Dimension feature  """  
+      self.WarehouseCodeDescription:str = obj["WarehouseCodeDescription"]
+      """  Description.  """  
+      self.RowMod:str = obj["RowMod"]
+      """  RowMod  """  
+      pass
+
+class Erp_Tablesets_JobProdRow:
+   def __init__(self, obj):
+      self.Company:str = obj["Company"]
+      """  Company Identifier.  """  
+      self.JobNum:str = obj["JobNum"]
+      """  Job Number. Used in tying record back to its parent JobHead record.  """  
+      self.OrderNum:int = obj["OrderNum"]
+      """  Related sales order number. For build to stock demands the OrderNum, OrderLine and OrderRel fields are all zero  """  
+      self.OrderLine:int = obj["OrderLine"]
+      """  Related Sales order line number.  """  
+      self.OrderRelNum:int = obj["OrderRelNum"]
+      """  Related sales order release number.  """  
+      self.ProdQty:int = obj["ProdQty"]
+      """   The planned production quantity for a  Job to fill the demand.
+Note: updates the JobHead.ProdQty via JobProd write trigger.  """  
+      self.WarehouseCode:str = obj["WarehouseCode"]
+      """   Inventory warehouse that job is producing for.
+Only relevant for build to stock demands (ordernum = 0). In this case a valid Part must be referenced.  """  
+      self.TargetJobNum:str = obj["TargetJobNum"]
+      """  Production Demands can be from other jobs.  That is, one job can be building parts that are required by another job. The demand is defined by a JobMtl record on some other job.  "TargetJobNum" is the job that this job is making parts for.  """  
+      self.TargetAssemblySeq:int = obj["TargetAssemblySeq"]
+      """  Assembly Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.TargetMtlSeq:int = obj["TargetMtlSeq"]
+      """  Material Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.ShippedQty:int = obj["ShippedQty"]
+      """   Quantity Shipped against this allocation.
+Updated via the ShipDtl write triggers.  """  
+      self.ReceivedQty:int = obj["ReceivedQty"]
+      """   Total quantity received to stock for this production allocation.
+Updated via the Manufacturing Receipts process  """  
+      self.WIPQty:int = obj["WIPQty"]
+      """   Represents the "outstanding" WIP production quantity.
+WIPQty = JobProd.Quantity - (ShippedQty +ReceivedQty) if negative then it is set to zero. If related Order Release is closed then reservation is zero.
+Updated via the JobProd, OrderRel triggers.  """  
+      self.CallNum:int = obj["CallNum"]
+      """  The Service Call number that this Job is linked to.  """  
+      self.CallLine:int = obj["CallLine"]
+      """  The Service Call Line that this Job is linked to.  """  
+      self.TFLineNum:str = obj["TFLineNum"]
+      """  This is the unique key for this table.  It will have a prefix like Job to indicate firm or unfirm orders.  The record can be linked to an Order Header by using the TFOrdNum TFOrdSeq keys.  """  
+      self.PartNum:str = obj["PartNum"]
+      """   Part number of the manufactured item.  Does not have to be valid in the Part master.  Cannot be blank.
+With verion 8.0 and Advanced Production License a job can have multiple end parts. These are defined in the JobPart table.
+This field has not changed. But will now be used to indicate the primary end part that is being produced. That is, the JobPart record where JobPart.PartNum = JobHead.PartNum will be considered as the primary end part. A primary part is only significant on Concurrent mode of production, because it?s quantity drives the material/operation requirements.  """  
+      self.Plant:str = obj["Plant"]
+      """  Site Identifier.  """  
+      self.DemandContractNum:int = obj["DemandContractNum"]
+      """  The demand contract this demand schedule is for.  """  
+      self.DemandHeadSeq:int = obj["DemandHeadSeq"]
+      """  The sequence from the DemandHead record this DemandSchedule is related to.  """  
+      self.DemandDtlSeq:int = obj["DemandDtlSeq"]
+      """  The sequence from the DemandDetail record this DemandSchedule is related to.  """  
+      self.DemandScheduleSeq:int = obj["DemandScheduleSeq"]
+      """  This field along with Company, DemandContractNum, DemandHeadSeq, and DemandDetailSeq make up the unique key to the table. The system should generate this number during entry of new detail records. The system determines next available number by finding the last DemandSchedulel record for the DemandDetail and the adding 1 to it.  """  
+      self.PlanUserID:str = obj["PlanUserID"]
+      """  PlanUserID  """  
+      self.PlanID:str = obj["PlanID"]
+      """  PlanID  """  
+      self.SysRevID:int = obj["SysRevID"]
+      """  Revision identifier for this row. It is incremented upon each write.  """  
+      self.SysRowID:str = obj["SysRowID"]
+      """  Unique identifier for this row. The value is a GUID.  """  
+      self.WIPToMiscShipment:bool = obj["WIPToMiscShipment"]
+      """  Job will be shipped through a Misc Shipment directly from WIP when job is closed.  """  
+      self.RMANum:int = obj["RMANum"]
+      """  RMA Num linked from RMA Disposition.  """  
+      self.RMALine:int = obj["RMALine"]
+      """  RMA Line linked from RMA Disposition.  """  
+      self.RMAReceipt:int = obj["RMAReceipt"]
+      """  RMA Receipt linked from RMA Disposition.  """  
+      self.RMADisp:int = obj["RMADisp"]
+      """  RMA Disposition linked from RMA Disposition.  """  
+      self.DMRNum:int = obj["DMRNum"]
+      """  DMRNum  """  
+      self.DMRActionNum:int = obj["DMRActionNum"]
+      """  DMRActionNum  """  
+      self.AttributeSetID:int = obj["AttributeSetID"]
+      """  The unique identifier of the related Dynamic Attribute Set.  """  
+      self.PlanningNumberOfPieces:int = obj["PlanningNumberOfPieces"]
+      """  Planning number of pieces for this attribute set.  """  
+      self.RevisionNum:str = obj["RevisionNum"]
+      """  Revision number which is used to uniquely identify the revision of the part.  """  
+      self.CustID:str = obj["CustID"]
+      """  The customer ID  """  
+      self.CustName:str = obj["CustName"]
+      """  The customer name.  """  
+      self.DemandLinkSource:str = obj["DemandLinkSource"]
+      """  The demand linke source  """  
+      self.DemandLinkStatus:str = obj["DemandLinkStatus"]
+      """  The demand link status  """  
+      self.IUM:str = obj["IUM"]
+      """  IUM  """  
+      self.JHPartDesc:str = obj["JHPartDesc"]
+      """  The jobhead part description  """  
+      self.JHPartNum:str = obj["JHPartNum"]
+      """  The jobhead part number  """  
+      self.MakeToJobQty:int = obj["MakeToJobQty"]
+      """  The make to job quantity  """  
+      self.MakeToStockQty:int = obj["MakeToStockQty"]
+      """  The make to stock quantity  """  
+      self.MakeToType:str = obj["MakeToType"]
+      """  The Make to type (i.e. Stock, Job, Order)  """  
+      self.MaxAllowedQty:int = obj["MaxAllowedQty"]
+      """  Calculated quantity that could come from allocatedqty or accumulation from parttran.  """  
+      self.MtlPartDesc:str = obj["MtlPartDesc"]
+      """  The jobmtl part description.  """  
+      self.MtlPartNum:str = obj["MtlPartNum"]
+      """  The jobmtl part number.  """  
+      self.OrdWIPQty:int = obj["OrdWIPQty"]
+      """  The order WIP quantity  """  
+      self.OurStockQty:int = obj["OurStockQty"]
+      """  Calculated field OurStockQty, will update OrderRel.OurStockQty  """  
+      self.PullFromStockWarehouseCode:str = obj["PullFromStockWarehouseCode"]
+      """  Pull from Stock warehouse code (orderrel.warehousecode  """  
+      self.PullFromStockWarehouseDesc:str = obj["PullFromStockWarehouseDesc"]
+      """  The pull from stock warehouse description  """  
+      self.ShipBy:str = obj["ShipBy"]
+      """  The Demand Link Due Date - Ship By  """  
+      self.SplitQty:int = obj["SplitQty"]
+      """  The split quantity for the demand.  """  
+      self.StkWIPQty:int = obj["StkWIPQty"]
+      """  The stock WIP quantity  """  
+      self.TFOrdLine:int = obj["TFOrdLine"]
+      self.TFOrdNum:str = obj["TFOrdNum"]
+      self.TotalSplitQuantity:int = obj["TotalSplitQuantity"]
+      """  Temp field so UI has a column to bind to for calculation of Total Split Quantity.  """  
+      self.TrackSerialNumbers:bool = obj["TrackSerialNumbers"]
+      self.Valid:bool = obj["Valid"]
+      """  This is a field used in Split Job to determine if record has been validated.  """  
+      self.AsmPartDesc:str = obj["AsmPartDesc"]
+      """  The jobasmbl part description.  """  
+      self.AsmPartNum:str = obj["AsmPartNum"]
+      """  The jobasmbl part number.  """  
+      self.EnableAttributeSetSearch:bool = obj["EnableAttributeSetSearch"]
+      self.DispNumberOfPieces:int = obj["DispNumberOfPieces"]
+      """  Number of pieces for inventory attribute tracked parts.  """  
+      self.CustInactive:bool = obj["CustInactive"]
+      """  Indicates a customer referenced on the record is inactive.  """  
+      self.ShipToNumInactive:bool = obj["ShipToNumInactive"]
+      """  Indicates if a ShipTo referenced on the record is inactive.  """  
+      self.BitFlag:int = obj["BitFlag"]
+      self.CallLineLineDesc:str = obj["CallLineLineDesc"]
+      self.DynAttrValueSetShortDescription:str = obj["DynAttrValueSetShortDescription"]
+      self.DynAttrValueSetDescription:str = obj["DynAttrValueSetDescription"]
+      self.JobNumPartDescription:str = obj["JobNumPartDescription"]
+      self.OrderLineLineDesc:str = obj["OrderLineLineDesc"]
+      self.OrderNumCurrencyCode:str = obj["OrderNumCurrencyCode"]
+      self.OrderNumCardMemberName:str = obj["OrderNumCardMemberName"]
+      self.PartAttrClassID:str = obj["PartAttrClassID"]
+      self.PartTrackInventoryByRevision:bool = obj["PartTrackInventoryByRevision"]
+      self.PartSalesUM:str = obj["PartSalesUM"]
+      self.PartTrackSerialNum:bool = obj["PartTrackSerialNum"]
+      self.PartSellingFactor:int = obj["PartSellingFactor"]
+      self.PartTrackLots:bool = obj["PartTrackLots"]
+      self.PartIUM:str = obj["PartIUM"]
+      self.PartTrackDimension:bool = obj["PartTrackDimension"]
+      self.PartPricePerCode:str = obj["PartPricePerCode"]
+      self.PartPartDescription:str = obj["PartPartDescription"]
+      self.PartTrackInventoryAttributes:bool = obj["PartTrackInventoryAttributes"]
+      self.WarehouseCodeDescription:str = obj["WarehouseCodeDescription"]
+      self.RowMod:str = obj["RowMod"]
+      """  RowMod  """  
+      pass
+
+
+
+
+#########################################################################
+# Custom Schemas:
+#########################################################################
+class DeleteByID_input:
+   """ Required : 
+   jobNum
+   partNum
+   orderNum
+   orderLine
+   orderRelNum
+   warehouseCode
+   targetJobNum
+   targetAssemblySeq
+   targetMtlSeq
+   """  
+   def __init__(self, obj):
+      self.jobNum:str = obj["jobNum"]
+      self.partNum:str = obj["partNum"]
+      self.orderNum:int = obj["orderNum"]
+      self.orderLine:int = obj["orderLine"]
+      self.orderRelNum:int = obj["orderRelNum"]
+      self.warehouseCode:str = obj["warehouseCode"]
+      self.targetJobNum:str = obj["targetJobNum"]
+      self.targetAssemblySeq:int = obj["targetAssemblySeq"]
+      self.targetMtlSeq:int = obj["targetMtlSeq"]
+      pass
+
+class DeleteByID_output:
+   def __init__(self, obj):
+      pass
+
+class Erp_Tablesets_JobProdListRow:
+   def __init__(self, obj):
+      self.Company:str = obj["Company"]
+      """  Company Identifier.  """  
+      self.JobNum:str = obj["JobNum"]
+      """  Job Number. Used in tying record back to its parent JobHead record.  """  
+      self.OrderNum:int = obj["OrderNum"]
+      """  Related sales order number. For build to stock demands the OrderNum, OrderLine and OrderRel fields are all zero  """  
+      self.OrderLine:int = obj["OrderLine"]
+      """  Related Sales order line number.  """  
+      self.OrderRelNum:int = obj["OrderRelNum"]
+      """  Related sales order release number.  """  
+      self.ProdQty:int = obj["ProdQty"]
+      """   The planned production quantity for a  Job to fill the demand.
+Note: updates the JobHead.ProdQty via JobProd write trigger.  """  
+      self.WarehouseCode:str = obj["WarehouseCode"]
+      """   Inventory warehouse that job is producing for.
+Only relevant for build to stock demands (ordernum = 0). In this case a valid Part must be referenced.  """  
+      self.TargetJobNum:str = obj["TargetJobNum"]
+      """  Production Demands can be from other jobs.  That is, one job can be building parts that are required by another job. The demand is defined by a JobMtl record on some other job.  "TargetJobNum" is the job that this job is making parts for.  """  
+      self.TargetAssemblySeq:int = obj["TargetAssemblySeq"]
+      """  Assembly Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.TargetMtlSeq:int = obj["TargetMtlSeq"]
+      """  Material Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.ShippedQty:int = obj["ShippedQty"]
+      """   Quantity Shipped against this allocation.
+Updated via the ShipDtl write triggers.  """  
+      self.ReceivedQty:int = obj["ReceivedQty"]
+      """   Total quantity received to stock for this production allocation.
+Updated via the Manufacturing Receipts process  """  
+      self.WIPQty:int = obj["WIPQty"]
+      """   Represents the "outstanding" WIP production quantity.
+WIPQty = JobProd.Quantity - (ShippedQty +ReceivedQty) if negative then it is set to zero. If related Order Release is closed then reservation is zero.
+Updated via the JobProd, OrderRel triggers.  """  
+      self.CallNum:int = obj["CallNum"]
+      """  The Service Call number that this Job is linked to.  """  
+      self.CallLine:int = obj["CallLine"]
+      """  The Service Call Line that this Job is linked to.  """  
+      self.TFLineNum:str = obj["TFLineNum"]
+      """  This is the unique key for this table.  It will have a prefix like Job to indicate firm or unfirm orders.  The record can be linked to an Order Header by using the TFOrdNum TFOrdSeq keys.  """  
+      self.PartNum:str = obj["PartNum"]
+      """   Part number of the manufactured item.  Does not have to be valid in the Part master.  Cannot be blank.
+With verion 8.0 and Advanced Production License a job can have multiple end parts. These are defined in the JobPart table.
+This field has not changed. But will now be used to indicate the primary end part that is being produced. That is, the JobPart record where JobPart.PartNum = JobHead.PartNum will be considered as the primary end part. A primary part is only significant on Concurrent mode of production, because it?s quantity drives the material/operation requirements.  """  
+      self.Plant:str = obj["Plant"]
+      """  Site Identifier.  """  
+      self.DemandContractNum:int = obj["DemandContractNum"]
+      """  The demand contract this demand schedule is for.  """  
+      self.DemandHeadSeq:int = obj["DemandHeadSeq"]
+      """  The sequence from the DemandHead record this DemandSchedule is related to.  """  
+      self.DemandDtlSeq:int = obj["DemandDtlSeq"]
+      """  The sequence from the DemandDetail record this DemandSchedule is related to.  """  
+      self.DemandScheduleSeq:int = obj["DemandScheduleSeq"]
+      """  This field along with Company, DemandContractNum, DemandHeadSeq, and DemandDetailSeq make up the unique key to the table. The system should generate this number during entry of new detail records. The system determines next available number by finding the last DemandSchedulel record for the DemandDetail and the adding 1 to it.  """  
+      self.SysRevID:int = obj["SysRevID"]
+      """  Revision identifier for this row. It is incremented upon each write.  """  
+      self.SysRowID:str = obj["SysRowID"]
+      """  Unique identifier for this row. The value is a GUID.  """  
+      self.ShipBy:str = obj["ShipBy"]
+      """  The Demand Link Due Date - Ship By  """  
+      self.DemandLinkStatus:str = obj["DemandLinkStatus"]
+      """  The demand link status  """  
+      self.DemandLinkSource:str = obj["DemandLinkSource"]
+      """  The demand linke source  """  
+      self.MakeToType:str = obj["MakeToType"]
+      """  The Make to type (i.e. Stock, Job, Order)  """  
+      self.CustID:str = obj["CustID"]
+      """  The customer ID  """  
+      self.CustName:str = obj["CustName"]
+      """  The customer name.  """  
+      self.StkWIPQty:int = obj["StkWIPQty"]
+      """  The stock WIP quantity  """  
+      self.OrdWIPQty:int = obj["OrdWIPQty"]
+      """  The order WIP quantity  """  
+      self.JHPartNum:str = obj["JHPartNum"]
+      """  The jobhead part number  """  
+      self.AsmPartNum:str = obj["AsmPartNum"]
+      """  The jobasmbl part number.  """  
+      self.MtlPartNum:str = obj["MtlPartNum"]
+      """  The jobmtl part number.  """  
+      self.JHPartDesc:str = obj["JHPartDesc"]
+      """  The jobhead part description  """  
+      self.AsmPartDesc:str = obj["AsmPartDesc"]
+      """  The jobasmbl part description.  """  
+      self.MtlPartDesc:str = obj["MtlPartDesc"]
+      """  The jobmtl part description.  """  
+      self.OurStockQty:int = obj["OurStockQty"]
+      """  Calculated field OurStockQty, will update OrderRel.OurStockQty  """  
+      self.MakeToStockQty:int = obj["MakeToStockQty"]
+      """  The make to stock quantity  """  
+      self.MakeToJobQty:int = obj["MakeToJobQty"]
+      """  The make to job quantity  """  
+      self.PullFromStockWarehouseCode:str = obj["PullFromStockWarehouseCode"]
+      """  Pull from Stock warehouse code (orderrel.warehousecode  """  
+      self.PullFromStockWarehouseDesc:str = obj["PullFromStockWarehouseDesc"]
+      """  The pull from stock warehouse description  """  
+      self.SplitQty:int = obj["SplitQty"]
+      """  The split quantity for the demand.  """  
+      self.MaxAllowedQty:int = obj["MaxAllowedQty"]
+      """  Calculated quantity that could come from allocatedqty or accumulation from parttran.  """  
+      self.TotalSplitQuantity:int = obj["TotalSplitQuantity"]
+      """  Temp field so UI has a column to bind to for calculation of Total Split Quantity.  """  
+      self.Valid:bool = obj["Valid"]
+      """  This is a field used in Split Job to determine if record has been validated.  """  
+      self.TFOrdLine:int = obj["TFOrdLine"]
+      self.TFOrdNum:str = obj["TFOrdNum"]
+      self.IUM:str = obj["IUM"]
+      """  IUM  """  
+      self.TrackSerialNumbers:bool = obj["TrackSerialNumbers"]
+      self.CallLineLineDesc:str = obj["CallLineLineDesc"]
+      """  Line Item description. The Part.Description can be used as a default.  """  
+      self.JobNumPartDescription:str = obj["JobNumPartDescription"]
+      """  The description of the part that is to be manufactured.  Use the Part.Description as the default.  """  
+      self.OrderLineLineDesc:str = obj["OrderLineLineDesc"]
+      """  Line Item description. The Part.Description can be used as a default.  """  
+      self.OrderNumCardMemberName:str = obj["OrderNumCardMemberName"]
+      """  The member's name on the credit card.  """  
+      self.OrderNumCurrencyCode:str = obj["OrderNumCurrencyCode"]
+      """  A unique code that identifies the currency.  """  
+      self.PartIUM:str = obj["PartIUM"]
+      """  Primary Inventory Unit of Measure. The unit costs, are based on this uom. Used as a default for issue transactions for the part.  Part onhand and allocation quantities are tracked by this uom.  The quantities can also be tracked by other uoms (see PartUOM table) but tracking at this uom is mandatory.   Use UOMClass.DefUOMCode of the system default UOMClass  when creating new part records (see XASyst.DefUOMClassID).  """  
+      self.PartSalesUM:str = obj["PartSalesUM"]
+      """  The Selling Unit of measure for the Part. The UOM which the unit prices are based on. Defaults as the Part.IUM.  """  
+      self.PartTrackLots:bool = obj["PartTrackLots"]
+      """  Indicates if Lot numbers are prompted for in transactions for this part.  Backflushing and AutoReceiving functions are ignored when TrackLots = Yes.  """  
+      self.PartTrackSerialNum:bool = obj["PartTrackSerialNum"]
+      """  Indicates if this part is serial number tracked  """  
+      self.PartPartDescription:str = obj["PartPartDescription"]
+      """  Describes the Part.  """  
+      self.PartSellingFactor:int = obj["PartSellingFactor"]
+      """   This value is used to convert quantity when there is a difference in the customers unit of measure and how it is stocked in inventory. Example is sold in pounds, stocked in sheets.  
+
+Formula: Inventory Qty * Conversion Factor = Selling Qty.  """  
+      self.PartPricePerCode:str = obj["PartPricePerCode"]
+      """  Indicates the pricing per quantity for this part. It can be "E" = per each, "C" = per hundred,  "M" = per thousand. Maintainable only via Part Maintenance. The initial default is "E". Used as default PricePerCode in order entry and invoice entry.  """  
+      self.PartTrackDimension:bool = obj["PartTrackDimension"]
+      """   Onhand quantity is always tracked in the Parts primary inventory uom (Part.IUM). Checking this box indicates that you want to allow tracking of onhand quantity by additional uoms. 
+The actual UOMs to be tracked for the part are indicated by PartUOM.TrackOnHand. In order to set the PartUOM.TrackOhHand = True the Part.TrackDimension must = true.
+This replaces the old 8.3 Track Dimension feature  """  
+      self.WarehouseCodeDescription:str = obj["WarehouseCodeDescription"]
+      """  Description.  """  
+      self.RowMod:str = obj["RowMod"]
+      """  RowMod  """  
+      pass
+
+class Erp_Tablesets_JobProdListTableset:
+   def __init__(self, obj):
+      self.JobProdList:list[Erp_Tablesets_JobProdListRow] = obj["JobProdList"]
+      self.ExtensionTables:list[Ice_Extensions_ExtensionTableData] = obj["ExtensionTables"]
+      pass
+
+class Erp_Tablesets_JobProdRow:
+   def __init__(self, obj):
+      self.Company:str = obj["Company"]
+      """  Company Identifier.  """  
+      self.JobNum:str = obj["JobNum"]
+      """  Job Number. Used in tying record back to its parent JobHead record.  """  
+      self.OrderNum:int = obj["OrderNum"]
+      """  Related sales order number. For build to stock demands the OrderNum, OrderLine and OrderRel fields are all zero  """  
+      self.OrderLine:int = obj["OrderLine"]
+      """  Related Sales order line number.  """  
+      self.OrderRelNum:int = obj["OrderRelNum"]
+      """  Related sales order release number.  """  
+      self.ProdQty:int = obj["ProdQty"]
+      """   The planned production quantity for a  Job to fill the demand.
+Note: updates the JobHead.ProdQty via JobProd write trigger.  """  
+      self.WarehouseCode:str = obj["WarehouseCode"]
+      """   Inventory warehouse that job is producing for.
+Only relevant for build to stock demands (ordernum = 0). In this case a valid Part must be referenced.  """  
+      self.TargetJobNum:str = obj["TargetJobNum"]
+      """  Production Demands can be from other jobs.  That is, one job can be building parts that are required by another job. The demand is defined by a JobMtl record on some other job.  "TargetJobNum" is the job that this job is making parts for.  """  
+      self.TargetAssemblySeq:int = obj["TargetAssemblySeq"]
+      """  Assembly Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.TargetMtlSeq:int = obj["TargetMtlSeq"]
+      """  Material Sequence of the JobMtl record that is making the production demand. (See "TargetJobNum")  """  
+      self.ShippedQty:int = obj["ShippedQty"]
+      """   Quantity Shipped against this allocation.
+Updated via the ShipDtl write triggers.  """  
+      self.ReceivedQty:int = obj["ReceivedQty"]
+      """   Total quantity received to stock for this production allocation.
+Updated via the Manufacturing Receipts process  """  
+      self.WIPQty:int = obj["WIPQty"]
+      """   Represents the "outstanding" WIP production quantity.
+WIPQty = JobProd.Quantity - (ShippedQty +ReceivedQty) if negative then it is set to zero. If related Order Release is closed then reservation is zero.
+Updated via the JobProd, OrderRel triggers.  """  
+      self.CallNum:int = obj["CallNum"]
+      """  The Service Call number that this Job is linked to.  """  
+      self.CallLine:int = obj["CallLine"]
+      """  The Service Call Line that this Job is linked to.  """  
+      self.TFLineNum:str = obj["TFLineNum"]
+      """  This is the unique key for this table.  It will have a prefix like Job to indicate firm or unfirm orders.  The record can be linked to an Order Header by using the TFOrdNum TFOrdSeq keys.  """  
+      self.PartNum:str = obj["PartNum"]
+      """   Part number of the manufactured item.  Does not have to be valid in the Part master.  Cannot be blank.
+With verion 8.0 and Advanced Production License a job can have multiple end parts. These are defined in the JobPart table.
+This field has not changed. But will now be used to indicate the primary end part that is being produced. That is, the JobPart record where JobPart.PartNum = JobHead.PartNum will be considered as the primary end part. A primary part is only significant on Concurrent mode of production, because it?s quantity drives the material/operation requirements.  """  
+      self.Plant:str = obj["Plant"]
+      """  Site Identifier.  """  
+      self.DemandContractNum:int = obj["DemandContractNum"]
+      """  The demand contract this demand schedule is for.  """  
+      self.DemandHeadSeq:int = obj["DemandHeadSeq"]
+      """  The sequence from the DemandHead record this DemandSchedule is related to.  """  
+      self.DemandDtlSeq:int = obj["DemandDtlSeq"]
+      """  The sequence from the DemandDetail record this DemandSchedule is related to.  """  
+      self.DemandScheduleSeq:int = obj["DemandScheduleSeq"]
+      """  This field along with Company, DemandContractNum, DemandHeadSeq, and DemandDetailSeq make up the unique key to the table. The system should generate this number during entry of new detail records. The system determines next available number by finding the last DemandSchedulel record for the DemandDetail and the adding 1 to it.  """  
+      self.PlanUserID:str = obj["PlanUserID"]
+      """  PlanUserID  """  
+      self.PlanID:str = obj["PlanID"]
+      """  PlanID  """  
+      self.SysRevID:int = obj["SysRevID"]
+      """  Revision identifier for this row. It is incremented upon each write.  """  
+      self.SysRowID:str = obj["SysRowID"]
+      """  Unique identifier for this row. The value is a GUID.  """  
+      self.WIPToMiscShipment:bool = obj["WIPToMiscShipment"]
+      """  Job will be shipped through a Misc Shipment directly from WIP when job is closed.  """  
+      self.RMANum:int = obj["RMANum"]
+      """  RMA Num linked from RMA Disposition.  """  
+      self.RMALine:int = obj["RMALine"]
+      """  RMA Line linked from RMA Disposition.  """  
+      self.RMAReceipt:int = obj["RMAReceipt"]
+      """  RMA Receipt linked from RMA Disposition.  """  
+      self.RMADisp:int = obj["RMADisp"]
+      """  RMA Disposition linked from RMA Disposition.  """  
+      self.DMRNum:int = obj["DMRNum"]
+      """  DMRNum  """  
+      self.DMRActionNum:int = obj["DMRActionNum"]
+      """  DMRActionNum  """  
+      self.AttributeSetID:int = obj["AttributeSetID"]
+      """  The unique identifier of the related Dynamic Attribute Set.  """  
+      self.PlanningNumberOfPieces:int = obj["PlanningNumberOfPieces"]
+      """  Planning number of pieces for this attribute set.  """  
+      self.RevisionNum:str = obj["RevisionNum"]
+      """  Revision number which is used to uniquely identify the revision of the part.  """  
+      self.CustID:str = obj["CustID"]
+      """  The customer ID  """  
+      self.CustName:str = obj["CustName"]
+      """  The customer name.  """  
+      self.DemandLinkSource:str = obj["DemandLinkSource"]
+      """  The demand linke source  """  
+      self.DemandLinkStatus:str = obj["DemandLinkStatus"]
+      """  The demand link status  """  
+      self.IUM:str = obj["IUM"]
+      """  IUM  """  
+      self.JHPartDesc:str = obj["JHPartDesc"]
+      """  The jobhead part description  """  
+      self.JHPartNum:str = obj["JHPartNum"]
+      """  The jobhead part number  """  
+      self.MakeToJobQty:int = obj["MakeToJobQty"]
+      """  The make to job quantity  """  
+      self.MakeToStockQty:int = obj["MakeToStockQty"]
+      """  The make to stock quantity  """  
+      self.MakeToType:str = obj["MakeToType"]
+      """  The Make to type (i.e. Stock, Job, Order)  """  
+      self.MaxAllowedQty:int = obj["MaxAllowedQty"]
+      """  Calculated quantity that could come from allocatedqty or accumulation from parttran.  """  
+      self.MtlPartDesc:str = obj["MtlPartDesc"]
+      """  The jobmtl part description.  """  
+      self.MtlPartNum:str = obj["MtlPartNum"]
+      """  The jobmtl part number.  """  
+      self.OrdWIPQty:int = obj["OrdWIPQty"]
+      """  The order WIP quantity  """  
+      self.OurStockQty:int = obj["OurStockQty"]
+      """  Calculated field OurStockQty, will update OrderRel.OurStockQty  """  
+      self.PullFromStockWarehouseCode:str = obj["PullFromStockWarehouseCode"]
+      """  Pull from Stock warehouse code (orderrel.warehousecode  """  
+      self.PullFromStockWarehouseDesc:str = obj["PullFromStockWarehouseDesc"]
+      """  The pull from stock warehouse description  """  
+      self.ShipBy:str = obj["ShipBy"]
+      """  The Demand Link Due Date - Ship By  """  
+      self.SplitQty:int = obj["SplitQty"]
+      """  The split quantity for the demand.  """  
+      self.StkWIPQty:int = obj["StkWIPQty"]
+      """  The stock WIP quantity  """  
+      self.TFOrdLine:int = obj["TFOrdLine"]
+      self.TFOrdNum:str = obj["TFOrdNum"]
+      self.TotalSplitQuantity:int = obj["TotalSplitQuantity"]
+      """  Temp field so UI has a column to bind to for calculation of Total Split Quantity.  """  
+      self.TrackSerialNumbers:bool = obj["TrackSerialNumbers"]
+      self.Valid:bool = obj["Valid"]
+      """  This is a field used in Split Job to determine if record has been validated.  """  
+      self.AsmPartDesc:str = obj["AsmPartDesc"]
+      """  The jobasmbl part description.  """  
+      self.AsmPartNum:str = obj["AsmPartNum"]
+      """  The jobasmbl part number.  """  
+      self.EnableAttributeSetSearch:bool = obj["EnableAttributeSetSearch"]
+      self.DispNumberOfPieces:int = obj["DispNumberOfPieces"]
+      """  Number of pieces for inventory attribute tracked parts.  """  
+      self.CustInactive:bool = obj["CustInactive"]
+      """  Indicates a customer referenced on the record is inactive.  """  
+      self.ShipToNumInactive:bool = obj["ShipToNumInactive"]
+      """  Indicates if a ShipTo referenced on the record is inactive.  """  
+      self.BitFlag:int = obj["BitFlag"]
+      self.CallLineLineDesc:str = obj["CallLineLineDesc"]
+      self.DynAttrValueSetShortDescription:str = obj["DynAttrValueSetShortDescription"]
+      self.DynAttrValueSetDescription:str = obj["DynAttrValueSetDescription"]
+      self.JobNumPartDescription:str = obj["JobNumPartDescription"]
+      self.OrderLineLineDesc:str = obj["OrderLineLineDesc"]
+      self.OrderNumCurrencyCode:str = obj["OrderNumCurrencyCode"]
+      self.OrderNumCardMemberName:str = obj["OrderNumCardMemberName"]
+      self.PartAttrClassID:str = obj["PartAttrClassID"]
+      self.PartTrackInventoryByRevision:bool = obj["PartTrackInventoryByRevision"]
+      self.PartSalesUM:str = obj["PartSalesUM"]
+      self.PartTrackSerialNum:bool = obj["PartTrackSerialNum"]
+      self.PartSellingFactor:int = obj["PartSellingFactor"]
+      self.PartTrackLots:bool = obj["PartTrackLots"]
+      self.PartIUM:str = obj["PartIUM"]
+      self.PartTrackDimension:bool = obj["PartTrackDimension"]
+      self.PartPricePerCode:str = obj["PartPricePerCode"]
+      self.PartPartDescription:str = obj["PartPartDescription"]
+      self.PartTrackInventoryAttributes:bool = obj["PartTrackInventoryAttributes"]
+      self.WarehouseCodeDescription:str = obj["WarehouseCodeDescription"]
+      self.RowMod:str = obj["RowMod"]
+      """  RowMod  """  
+      pass
+
+class Erp_Tablesets_JobProdSearchTableset:
+   def __init__(self, obj):
+      self.JobProd:list[Erp_Tablesets_JobProdRow] = obj["JobProd"]
+      self.ExtensionTables:list[Ice_Extensions_ExtensionTableData] = obj["ExtensionTables"]
+      pass
+
+class Erp_Tablesets_UpdExtJobProdSearchTableset:
+   def __init__(self, obj):
+      self.JobProd:list[Erp_Tablesets_JobProdRow] = obj["JobProd"]
+      self.ExtensionTables:list[Ice_Extensions_ExtensionTableData] = obj["ExtensionTables"]
+      pass
+
+class GetByID_input:
+   """ Required : 
+   jobNum
+   partNum
+   orderNum
+   orderLine
+   orderRelNum
+   warehouseCode
+   targetJobNum
+   targetAssemblySeq
+   targetMtlSeq
+   """  
+   def __init__(self, obj):
+      self.jobNum:str = obj["jobNum"]
+      self.partNum:str = obj["partNum"]
+      self.orderNum:int = obj["orderNum"]
+      self.orderLine:int = obj["orderLine"]
+      self.orderRelNum:int = obj["orderRelNum"]
+      self.warehouseCode:str = obj["warehouseCode"]
+      self.targetJobNum:str = obj["targetJobNum"]
+      self.targetAssemblySeq:int = obj["targetAssemblySeq"]
+      self.targetMtlSeq:int = obj["targetMtlSeq"]
+      pass
+
+class GetByID_output:
+   def __init__(self, obj):
+      self.returnObj:list[Erp_Tablesets_JobProdSearchTableset] = obj["returnObj"]
+      pass
+
+class GetBySysRowID_input:
+   """ Required : 
+   id
+   """  
+   def __init__(self, obj):
+      self.id:str = obj["id"]
+      pass
+
+class GetBySysRowID_output:
+   def __init__(self, obj):
+      self.returnObj:list[Erp_Tablesets_JobProdSearchTableset] = obj["returnObj"]
+      pass
+
+class GetBySysRowIDs_input:
+   """ Required : 
+   ids
+   """  
+   def __init__(self, obj):
+      self.ids:str = obj["ids"]
+      pass
+
+class GetBySysRowIDs_output:
+   def __init__(self, obj):
+      self.returnObj:list[Erp_Tablesets_JobProdSearchTableset] = obj["returnObj"]
+      pass
+
+class GetList_input:
+   """ Required : 
+   whereClause
+   pageSize
+   absolutePage
+   """  
+   def __init__(self, obj):
+      self.whereClause:str = obj["whereClause"]
+      """  An expression used to filter the rows. Can be left blank for all rows.  """  
+      self.pageSize:int = obj["pageSize"]
+      """  The maximum number of rows to return. Leave as zero for no maximum.  """  
+      self.absolutePage:int = obj["absolutePage"]
+      """  Page of rows to return.  """  
+      pass
+
+class GetList_output:
+   def __init__(self, obj):
+      self.returnObj:list[Erp_Tablesets_JobProdListTableset] = obj["returnObj"]
+      pass
+
+   def parameters(self, obj):
+      self.morePages:bool = obj["morePages"]
+      pass
+
+      """  output parameters  """  
+
+class GetNewJobProd_input:
+   """ Required : 
+   ds
+   jobNum
+   partNum
+   orderNum
+   orderLine
+   orderRelNum
+   warehouseCode
+   targetJobNum
+   targetAssemblySeq
+   """  
+   def __init__(self, obj):
+      self.ds:list[Erp_Tablesets_JobProdSearchTableset] = obj["ds"]
+      self.jobNum:str = obj["jobNum"]
+      self.partNum:str = obj["partNum"]
+      self.orderNum:int = obj["orderNum"]
+      self.orderLine:int = obj["orderLine"]
+      self.orderRelNum:int = obj["orderRelNum"]
+      self.warehouseCode:str = obj["warehouseCode"]
+      self.targetJobNum:str = obj["targetJobNum"]
+      self.targetAssemblySeq:int = obj["targetAssemblySeq"]
+      pass
+
+class GetNewJobProd_output:
+   def __init__(self, obj):
+      pass
+
+   def parameters(self, obj):
+      self.ds:list[Erp_Tablesets_JobProdSearchTableset] = obj["ds"]
+      pass
+
+      """  output parameters  """  
+
+class GetRows_input:
+   """ Required : 
+   whereClauseJobProd
+   pageSize
+   absolutePage
+   """  
+   def __init__(self, obj):
+      self.whereClauseJobProd:str = obj["whereClauseJobProd"]
+      self.pageSize:int = obj["pageSize"]
+      self.absolutePage:int = obj["absolutePage"]
+      pass
+
+class GetRows_output:
+   def __init__(self, obj):
+      self.returnObj:list[Erp_Tablesets_JobProdSearchTableset] = obj["returnObj"]
+      pass
+
+   def parameters(self, obj):
+      self.morePages:bool = obj["morePages"]
+      pass
+
+      """  output parameters  """  
+
+class Ice_BOUpdErrorRow:
+   def __init__(self, obj):
+      self.TableName:str = obj["TableName"]
+      self.ErrorLevel:str = obj["ErrorLevel"]
+      self.ErrorType:str = obj["ErrorType"]
+      self.ErrorText:str = obj["ErrorText"]
+      self.ErrorSysRowID:str = obj["ErrorSysRowID"]
+      self.SysRowID:str = obj["SysRowID"]
+      self.RowMod:str = obj["RowMod"]
+      pass
+
+class Ice_BOUpdErrorTableset:
+   def __init__(self, obj):
+      self.BOUpdError:list[Ice_BOUpdErrorRow] = obj["BOUpdError"]
+      self.ExtensionTables:list[Ice_Extensions_ExtensionTableData] = obj["ExtensionTables"]
+      pass
+
+class Ice_Extensions_ExtensionRow:
+   def __init__(self, obj):
+      self.ColumnValues:object
+      self.RowMod:str = obj["RowMod"]
+      self.SysRowID:str = obj["SysRowID"]
+      pass
+
+class Ice_Extensions_ExtensionTableColumn:
+   def __init__(self, obj):
+      self.ColumnName:str = obj["ColumnName"]
+      self.ColumnType:str = obj["ColumnType"]
+      pass
+
+class Ice_Extensions_ExtensionTableData:
+   def __init__(self, obj):
+      self.Table:list[Ice_Extensions_ExtensionRow] = obj["Table"]
+      self.SystemCode:str = obj["SystemCode"]
+      self.TableName:str = obj["TableName"]
+      self.Columns:list[Ice_Extensions_ExtensionTableColumn] = obj["Columns"]
+      self.PrimaryKeyColumns:str = obj["PrimaryKeyColumns"]
+      self.PeerTableSystemCode:str = obj["PeerTableSystemCode"]
+      self.PeerTableName:str = obj["PeerTableName"]
+      pass
+
+class UpdateExt_input:
+   """ Required : 
+   ds
+   continueProcessingOnError
+   rollbackParentOnChildError
+   """  
+   def __init__(self, obj):
+      self.ds:list[Erp_Tablesets_UpdExtJobProdSearchTableset] = obj["ds"]
+      self.continueProcessingOnError:bool = obj["continueProcessingOnError"]
+      self.rollbackParentOnChildError:bool = obj["rollbackParentOnChildError"]
+      pass
+
+class UpdateExt_output:
+   def __init__(self, obj):
+      self.returnObj:list[Ice_BOUpdErrorTableset] = obj["returnObj"]
+      pass
+
+   def parameters(self, obj):
+      self.ds:list[Erp_Tablesets_UpdExtJobProdSearchTableset] = obj["ds"]
+      self.errorsOccurred:bool = obj["errorsOccurred"]
+      pass
+
+      """  output parameters  """  
+
+class Update_input:
+   """ Required : 
+   ds
+   """  
+   def __init__(self, obj):
+      self.ds:list[Erp_Tablesets_JobProdSearchTableset] = obj["ds"]
+      pass
+
+class Update_output:
+   def __init__(self, obj):
+      pass
+
+   def parameters(self, obj):
+      self.ds:list[Erp_Tablesets_JobProdSearchTableset] = obj["ds"]
+      pass
+
+      """  output parameters  """  
+
